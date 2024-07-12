@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>หน้าหลัก | AppzStory</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/loading.css"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-info" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">ประกาศจากแอดมิน</h3>
+                  </div>
+                  <div class="col-12" id="board_admin"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-danger" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนลูกค้า</h3>
+                  </div>
+
+                  <div class="col-12" id="board_customer"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-success" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนสมัครสมาชิก</h3>
+                  </div>
+
+                  <div class="col-12" id="board_register"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-success" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนฝากเงิน</h3>
+                  </div>
+
+                  <div class="col-12" id="board_deposit"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-danger" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนถอนเงิน</h3>
+                  </div>
+
+                  <div class="col-12" id="board_withdraw"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+
+      <br />
+      <br />
+
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script> -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/pages/dashboard.js"></script> -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

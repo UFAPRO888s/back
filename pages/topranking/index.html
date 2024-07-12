@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>หน้าหลัก | AppzStory</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/loading.css"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #6bd34e; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้ฝากสูงสุด (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_deposit_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #d13216; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ถอนสูงสุด (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_withdraw_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #e98b1f; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ชนะหวยสูงสุด (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_lottowin_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #179be7; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ชนะเกมสูงสุด (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_gamewin_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #e98b1f; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้เสียหวยสูงสุด
+                    (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_lottoloss_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #179be7; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้เสียเกมสูงสุด
+                    (วัน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_gameloss_today"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #6bd34e; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้ฝากสูงสุด
+                    (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_deposit_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #d13216; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ถอนสูงสุด (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_withdraw_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #e98b1f; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ชนะหวยสูงสุด (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_lottowin_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #179be7; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="far fa-frown"></i> ผู้ชนะเกมสูงสุด (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_gamewin_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #e98b1f; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้เสียหวยสูงสุด
+                    (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_lottoloss_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card">
+                <div
+                  class="card-header"
+                  style="background-color: #179be7; color: white"
+                >
+                  <h3 class="card-title">
+                    <i class="fa-regular fa-face-smile"></i> ผู้เสียเกมสูงสุด
+                    (เดือน)
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table class="table" style="width: 100%">
+                    <tbody id="top_gameloss_month"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script> -->
+    <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/pages/dashboard.js"></script> -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="./js/result.js"></script>
+  </body>
+</html>

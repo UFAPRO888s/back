@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>หน้าหลัก | AppzStory</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico" />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/loading.css" />
+    <style>
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+    </style>
+    <script>
+        $(function() {
+            // $("#web-footer").load("../includes/footer.html");
+            // $("#web-sidebar").load("../includes/sidebar.html");
+        });
+    </script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <!-- <div w3-include-html="../inscludes/sidebar.html"></div> -->
+        <header></header>
+        <!-- <div id="web-sidebar"></div> -->
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-md-2">
+                                <div class="info-box shadow" style="
+                      background-color: #ffc107 !important;
+                      border-radius: 10px;
+                    ">
+                                    <div class="info-box-content" style="text-align: center">
+                                        <span class="info-box-text" style="font-size: 25px">แดชบอร์ด</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_7"
+                  onclick="setDataDashboard(7)"
+                >
+                  7
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_6"
+                  onclick="setDataDashboard(6)"
+                >
+                  6
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_5"
+                  onclick="setDataDashboard(5)"
+                >
+                  5
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_4"
+                  onclick="setDataDashboard(4)"
+                >
+                  4
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_3"
+                  onclick="setDataDashboard(3)"
+                >
+                  3
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_2"
+                  onclick="setDataDashboard(2)"
+                >
+                  2
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_1"
+                  onclick="setDataDashboard(1)"
+                >
+                  เมื่อวานนี้
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_0"
+                  onclick="setDataDashboard(0)"
+                >
+                  วันนี้
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  id="dash_31"
+                  onclick="setDataDashboard(31)"
+                >
+                  เดือนนี้
+                </button>
+                <button
+                  class="btn btn-outline-success"
+                  id="dash_32"
+                  onclick="setDataDashboard(0)"
+                >
+                  อัพเดทข้อมูลล่าสุด
+                </button>
+              </div>
+            </div>
+            <br />
+
+            <br /><br />
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-info circle-box-dashboard"
+                    ><i class="fa-solid fa-user-plus icon-dashboard"></i
+                  ></span>
+                                        <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/สมาชิกใหม่.png" alt="" style="width:90px;height:90px"> -->
+                                        <div class="info-box-content" style="text-align: right">
+                                            <span class="info-box-text" style="font-size: 17px">สมาชิกใหม่</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="NewMemberToday"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-info circle-box-dashboard"
+                    ><i class="fa-solid fa-users icon-dashboard"></i
+                  ></span>
+                                            <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/สมาชิกทั้งหมด.png" alt="" style="width:90px;height:90px"> -->
+                                            <div class="info-box-content" style="text-align: right">
+                                                <span class="info-box-text" style="font-size: 17px">สมาชิกทั้งหมด</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="MemberAll"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-info circle-box-dashboard"
+                    ><i class="fa-solid fa-user-clock icon-dashboard"></i
+                  ></span>
+                                                <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/สมาชิกออนไลน์ตอนนี้.png" alt="" -->
+                                                <!-- style="width:90px;height:90px"> -->
+                                                <div class="info-box-content" style="text-align: right">
+                                                    <span class="info-box-text" style="font-size: 17px">สมาชิกออนไลน์ตอนนี้</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="MemberOnlineNow"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-warning circle-box-dashboard"
+                    ><i class="fa-solid fa-users icon-dashboard"></i
+                  ></span>
+                                                    <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/สมาชิกออนไลน์ทั้งหมด.png" alt=""
+                                    style="width:90px;height:90px"> -->
+                                                    <div class="info-box-content" style="text-align: right">
+                                                        <span class="info-box-text" style="font-size: 17px">สมาชิกออนไลน์ทั้งหมด</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="MemberOnlineToday"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <!-- <span class="info-box-icon  bg-1 circle-box-dashboard"><i
+                                        class="fa-solid fa-dollar-sign icon-dashboard"></i></span> -->
+                                                        <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/ยอดฝาก.png" alt="" style="width: 90px; height: 90px" />
+                                                        <div class="info-box-content" style="text-align: right">
+                                                            <span class="info-box-text" style="font-size: 17px">ยอดฝาก</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="DepositToday"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-2 circle-box-dashboard"
+                    ><i class="fa-solid fa-dollar-sign icon-dashboard"></i
+                  ></span>
+                                                            <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/ยอดถอน.png" alt="" style="width:90px;height:90px"> -->
+                                                            <div class="info-box-content" style="text-align: right">
+                                                                <span class="info-box-text" style="font-size: 17px">ยอดถอน</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="WithdrawToday"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-1 circle-box-dashboard"
+                    ><i
+                      class="fa-solid fa-hand-holding-dollar icon-dashboard"
+                    ></i
+                  ></span>
+                                                                <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/กำไรต่อยอดเกม.png" alt="" style="width:90px;height:90px"> -->
+                                                                <div class="info-box-content" style="text-align: right">
+                                                                    <span class="info-box-text" style="font-size: 17px">กำไร/ยอดเล่น(เกมส์)</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="winloss"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-1 circle-box-dashboard"
+                    ><i
+                      class="fa-solid fa-hand-holding-dollar icon-dashboard"
+                    ></i
+                  ></span>
+                                                                    <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/กำไรต่อยอดหวย.png" alt="" style="width:90px;height:90px"> -->
+                                                                    <div class="info-box-content" style="text-align: right">
+                                                                        <span class="info-box-text" style="font-size: 17px">กำไร/ยอดเล่น(หวย)</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="winlosslotto"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-1 circle-box-dashboard"
+                    ><i class="fa-solid fa-money-bill-1-wave icon-dashboard"></i
+                  ></span>
+                                                                        <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/ยอดAF.png" alt="" style="width:90px;height:90px"> -->
+                                                                        <div class="info-box-content" style="text-align: right">
+                                                                            <span class="info-box-text" style="font-size: 17px">ยอดAF</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="data_aff"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-warning circle-box-dashboard"
+                    ><i class="fa-solid fa-users icon-dashboard"></i
+                  ></span>
+                                                                            <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/เครดิตในกระเป๋าสมาชิก.png" alt="" -->
+                                                                            <!-- style="width:90px;height:90px"> -->
+                                                                            <div class="info-box-content" style="text-align: right">
+                                                                                <span class="info-box-text" style="font-size: 17px">เครดิตในกระเป๋าสมาชิกทั้งหมด</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="CreditAllMember"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-warning circle-box-dashboard"
+                    ><i class="fa-solid fa-users icon-dashboard"></i
+                  ></span>
+                                                                                <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/เครดิตในกระเป๋า.png" alt=""
+                                    style="width:90px;height:90px"> -->
+                                                                                <div class="info-box-content" style="text-align: right">
+                                                                                    <span class="info-box-text" style="font-size: 17px">เครดิตในกระเป๋าAFทั้งหมด</span
+                    >
+                    <span class="info-box-number" style="font-size: 22px" id=""
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box shadow">
+                  <span class="info-box-icon bg-warning circle-box-dashboard"
+                    ><i class="fa-solid fa-users icon-dashboard"></i
+                  ></span>
+                                                                                    <!-- <img src="//s3auto.sgp1.vultrobjects.com/js_wauto/source/images/ยอดพนันคงค้าง.png" alt="" style="width:90px;height:90px"> -->
+                                                                                    <div class="info-box-content" style="text-align: right">
+                                                                                        <span class="info-box-text" style="font-size: 17px">ยอดพนันคงค้าง</span
+                    >
+                    <span
+                      class="info-box-number"
+                      style="font-size: 22px"
+                      id="data_bet"
+                      >0</span
+                    >
+                    <span
+                      class="updateTime"
+                      style="font-size: 12px; color: darkgray"
+                      >อัพเดทล่าสุด :</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-info" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">ประกาศจากแอดมิน</h3>
+                  </div>
+                  <div class="col-12" id="board_admin"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-danger" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนลูกค้า</h3>
+                  </div>
+
+                  <div class="col-12" id="board_customer"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-success" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนสมัครสมาชิก</h3>
+                  </div>
+
+                  <div class="col-12" id="board_register"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-success" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนฝากเงิน</h3>
+                  </div>
+
+                  <div class="col-12" id="board_deposit"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-12">
+                <div class="card card-danger" style="height: 250px">
+                  <div class="card-header">
+                    <h3 class="card-title">แจ้งเตือนถอนเงิน</h3>
+                  </div>
+
+                  <div class="col-12" id="board_withdraw"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <footer></footer>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+  <!-- OPTIONAL SCRIPTS -->
+  <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chart.js/Chart.min.js"></script> -->
+  <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script> -->
+  <!-- <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/pages/dashboard.js"></script> -->
+  <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+  <script src="../../constants/apiPort.js"></script>
+  <script src="../../constants/statusTextRespone.js"></script>
+  <script src="../../constants/validateValue.js"></script>
+  <script src="../../constants/util.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+  <script>
+      fetch("../includes/sidebar.html")
+          .then((response) => {
+              return response.text();
+          })
+          .then((data) => {
+              document.querySelector("header").innerHTML = data;
+          });
+
+      fetch("../includes/footer.html")
+          .then((response) => {
+              return response.text();
+          })
+          .then((data) => {
+              document.querySelector("footer").innerHTML = data;
+          });
+  </script>
+  <script src="../../includes/navtest.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

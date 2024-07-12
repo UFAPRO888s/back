@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <h4 style="margin-left: 20px;">การตั้งค่าโบนัสของพันธมิตร</h4>
+            <h4></h4>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header border-0 pt-4" style="background-color: green;">
+                                <h4 style="color: white;">
+                                    การตั้งค่าโบนัสของพันธมิตร
+                                </h4>
+                                <P style="color: white;">ตั้งค่าโบนัส</P>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ตั้งค่าความเสี่ยง-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container-fluid pt-4">
+                                <div style="margin-left: 20px;">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <label>การตั้งค่าโบนัส</label>
+                                </div>
+
+                                <div class="card-header">
+                                    <h5 class="card-text" style="text-align: center;">แนะนำเพื่อน</h5>
+
+                                </div>
+                                <br>
+                                <div class=" col-sm-8 container">
+                                    <fieldset style="border: 1px solid rgb(112, 112, 112); border-radius: 5px;">
+                                        <legend id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px;margin-left:20px; font-size: 15px; font-weight: bold;">
+                                            % affiliate หวย</legend>
+                                        <!-- <legend style="text-align: left; font-size: 14px;">% affiliate หวย</legend> -->
+                                        <div style="padding:10px;">
+                                            <button type="submit" class="btn btn-danger container-fluid" id="hide_2" onclick="function1()"><span id="htext1">ซ่อน</span></button>
+                                        </div>
+
+                                        <div style="padding: 20px;"></div>
+                                        <div class="container-fluid">
+                                            <div id="table_affiliate">
+                                                <form id="formData">
+                                                    <table aria-describedby="table_affiliate" class="table" id="tableAffiliate">
+                                                    </table>
+                                                    <div class="row mb-3">
+                                                        <div class="col-12 text-center">
+                                                            <button type="button" onclick="handleSubmit2()" class="btn btn-primary" id="btnSave">บันทึก</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+                                    </fieldset>
+                                </div>
+                                <div style="padding:30px;"></div>
+                                <div class=" col-sm-8 container">
+
+                                    <fieldset style="border: 1px solid rgb(112, 112, 112); border-radius: 5px;">
+                                        <!-- <legend style="text-align: left; font-size: 14px;">% affiliate สลอต คาสิโน
+                                        </legend> -->
+                                        <legend id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px;margin-left:20px; font-size: 15px; font-weight: bold;">
+                                            % affiliate สลอต คาสิโน</legend>
+                                        <div style="padding:10px ;">
+                                            <button type="submit" class="btn btn-danger container-fluid" id="hide_2" onclick="function2()"><span id="htext2">ซ่อน</span></button>
+                                        </div>
+
+                                        <div style="padding: 20px;"></div>
+
+
+                                        <div id="table_affiliate_slot">
+
+
+                                            <table class="table">
+                                                <thead>
+                                                    <h4 style="margin-left: 10px;">Live casino</h4>
+                                                </thead>
+                                                <tr>
+                                                    <th>Game</th>
+                                                    <td>
+                                                        <div class="col-auto">
+                                                            <div class="input-group mb-2">
+                                                                <input type="text" id="IAffCasino" class="form-control" style="width: 80%; background-color: azure;">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">%</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+
+                                            </table>
+                                            <div class="row p-3 m-0">
+                                                <div class="col-12 text-center">
+                                                    <button type="button" onclick="handleSubmitAffCasino()" class="btn btn-primary" id="btnSaveCasino">บันทึก</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </fieldset>
+                                </div>
+                                <div style="padding: 20px;"> </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--script show arrow-->
+    <script>
+        function Showcontent() {
+            var x = document.getElementById("showarrow");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="./js/bonus_setting.js"></script>
+</body>
+
+</html>

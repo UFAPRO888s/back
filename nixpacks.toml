@@ -1,0 +1,2 @@
+[phases.setup]
+nixPkgs = ['php81', 'perl','nginx','libmysqlclient']

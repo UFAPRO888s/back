@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepicker.js"></script>
+    <style>
+      body {
+        font-family: inherit !important;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <h1>ระบบโปรโมชั่น</h1>
+              </div>
+
+              <div class="col-12">
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  onclick="add_promotion_modal()"
+                >
+                  <i class="fa-solid fa-plus"></i> เพิ่มโปรโมชั่น
+                </button>
+                <br />
+                <br />
+                <div class="card shadow">
+                  <div class="card-header border-0 pt-4">
+                    <h4><i class="fas fa-users"></i> จัดการโปรโมชั่น</h4>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### DETAIL PROMOTION #################################### -->
+    <div class="modal fade" id="detaial_promotion" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">ข้อมูลโปรโมชั่น</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <img
+            src=""
+            class="rounded mx-auto d-block mt-5 mb-5"
+            alt="..."
+            width="50%"
+            id="img_1"
+          />
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> ประเภท </label>
+              <input
+                type="text"
+                id="pro_type"
+                name="pro_type"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+            </div>
+            <label class="active"> URL PIC </label>
+            <input
+              type="text"
+              class="form-control"
+              value=""
+              id="url_img_1"
+              disabled
+            />
+
+            <div class="form-group">
+              <label class="active"> ชื่อโปรโมชั่น </label>
+              <input
+                type="text"
+                id="name_1"
+                name="name_1"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+              <input type="hidden" id="id_pro_1" value="" disabled />
+            </div>
+            <div class="form-group">
+              <label class="active"> เปอร์เซ็นที่ได้รับจากการเติมเงิน </label>
+              <input
+                type="number"
+                id="percen_1"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">จำนวนเทิร์น / ยอด</label>
+              <input
+                type="number"
+                id="x_1"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">ฝากได้สูงสุด</label>
+              <input
+                type="number"
+                id="limit_1"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ฝากจำนวน </label>
+                  <input
+                    type="number"
+                    id="deposit_u"
+                    value="0"
+                    class="form-control"
+                    required=""
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> รับยอดจำนวน </label>
+                  <input
+                    type="number"
+                    id="receive_pro"
+                    value="0"
+                    class="form-control"
+                    required=""
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ถอนได้จำนวน </label>
+                  <input
+                    type="number"
+                    id="withdraw_u"
+                    value="0"
+                    class="form-control"
+                    required=""
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> จำนวนครั้ง/วัน </label>
+                  <input
+                    type="number"
+                    id="limit_r"
+                    value="0"
+                    class="form-control"
+                    required=""
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="active">รายละเอียดโปรโมชั่น</label>
+              <textarea
+                rows="10"
+                class="form-control"
+                id="text_1"
+                disabled
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="active">Token</label>
+              <input
+                type="text"
+                id="token_detail"
+                value=""
+                class="form-control"
+                required=""
+                disabled
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">สถานะการใช้</label>
+              <select id="stats_1" class="form-control"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL PROMOTION #################################### -->
+
+    <!-- #################################### EDIT PROMOTION #################################### -->
+    <div class="modal fade" id="edit_promotion" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">แก้ไขโปรโมชั่น</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <input type="hidden" class="form-control" value="" id="edit_id" />
+          <img
+            src=""
+            class="rounded mx-auto d-block mt-5 mb-5"
+            alt="..."
+            width="50%"
+            id="img_1_edit"
+          />
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> ประเภท </label>
+              <select name="" id="pro_type_edit" class="form-control"></select>
+            </div>
+            <label class="active"> URL PIC </label>
+            <input
+              type="text"
+              class="form-control"
+              value=""
+              id="url_img_1_edit"
+            />
+
+            <div class="form-group">
+              <label class="active"> ชื่อโปรโมชั่น </label>
+              <input
+                type="text"
+                id="name_1_edit"
+                name="name_1"
+                value=""
+                class="form-control"
+                required=""
+              />
+              <input type="hidden" id="id_pro_1_edit" value="" />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> เปอร์เซ็นที่ได้รับจากการเติมเงิน </label>
+              <input
+                type="number"
+                id="percen_1_edit"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">จำนวนเทิร์น / ยอด</label>
+              <input
+                type="number"
+                id="x_1_edit"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">ฝากได้สูงสุด</label>
+              <input
+                type="number"
+                id="limit_1_edit"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ฝากจำนวน </label>
+                  <input
+                    type="number"
+                    id="deposit_u_edit"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> รับยอดจำนวน </label>
+                  <input
+                    type="number"
+                    id="receive_pro_edit"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ถอนได้จำนวน </label>
+                  <input
+                    type="number"
+                    id="withdraw_u_edit"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> จำนวนครั้ง/วัน </label>
+                  <input
+                    type="number"
+                    id="limit_r_edit"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="active">รายละเอียดโปรโมชั่น</label>
+              <textarea
+                rows="10"
+                class="form-control"
+                id="text_1_edit"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="active">Token</label>
+              <input
+                type="text"
+                id="token_edit"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active">สถานะการใช้</label>
+              <select id="stats_1_edit" class="form-control"></select>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="edit_promotion()"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### EDIT PROMOTION #################################### -->
+
+    <!-- #################################### ADD PROMOTION #################################### -->
+    <div class="modal fade" id="add_promotion" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">เพิ่มโปรโมชั่น</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> ประเภท </label>
+              <select name="" id="pro_type_add" class="form-control"></select>
+            </div>
+            <label class="active"> URL PIC </label>
+            <input
+              type="text"
+              class="form-control"
+              value=""
+              id="url_img_1_add"
+            />
+
+            <div class="form-group">
+              <label class="active"> ชื่อโปรโมชั่น </label>
+              <input
+                type="text"
+                id="name_1_add"
+                name="name_1"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> เปอร์เซ็นที่ได้รับจากการเติมเงิน </label>
+              <input
+                type="number"
+                id="percen_1_add"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">จำนวนเทิร์น / ยอด</label>
+              <input
+                type="number"
+                id="x_1_add"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">ฝากได้สูงสุด</label>
+              <input
+                type="number"
+                id="limit_1_add"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ฝากจำนวน </label>
+                  <input
+                    type="number"
+                    id="deposit_u_add"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> รับยอดจำนวน </label>
+                  <input
+                    type="number"
+                    id="receive_pro_add"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> ถอนได้จำนวน </label>
+                  <input
+                    type="number"
+                    id="withdraw_u_add"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="active"> จำนวนครั้ง/วัน </label>
+                  <input
+                    type="number"
+                    id="limit_r_add"
+                    value="0"
+                    class="form-control"
+                    required=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="active">รายละเอียดโปรโมชั่น</label>
+              <textarea
+                rows="10"
+                class="form-control"
+                id="text_1_add"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="active">Token</label>
+              <input
+                type="text"
+                id="token_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active">สถานะการใช้</label>
+              <select id="stats_1_add" class="form-control">
+                <option value="1">เปิด</option>
+                <option value="0">ปิด</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="add_promotion()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### ADD PROMOTION #################################### -->
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

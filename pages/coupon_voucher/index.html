@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepickerEN.js"></script>
+    <style>
+      body {
+        font-family: inherit !important;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <h1>ระบบคูปอง</h1>
+              </div>
+
+              <br />
+              <div class="col-12">
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  onclick="add_coupon_modal()"
+                >
+                  <i class="fa-solid fa-plus"></i> เพิ่มคูปอง
+                </button>
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  onclick="add_group_coupon_modal()"
+                >
+                  <i class="fa-solid fa-plus"></i> เพิ่มกลุ่มคูปอง
+                </button>
+                <br />
+                <br />
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">ตั้งค่าคูปอง</h3>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">ตั้งค่ากลุ่มคูปอง</h3>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs1"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">รายงานการใช้งาน Coupon</h3>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs_Log"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### ADD coupon #################################### -->
+    <div class="modal fade" id="add_coupon" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">เพิ่มคูปอง</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> Coupon Name </label>
+              <input
+                type="text"
+                id="coupon_name"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> Coupon Code </label>&nbsp;&nbsp;<button
+                class="btn btn-info btn-xs"
+                onclick="randomCode()"
+              >
+                RANDOM
+              </button>
+              <input
+                type="text"
+                id="coupon_code"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active"> Coupon Bonus </label>
+              <input
+                type="number"
+                id="coupon_bonus"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">Coupon Amount</label>
+              <input
+                type="number"
+                id="coupon_amount"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">วันหมดอายุ</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                id="date_exp"
+              />
+            </div>
+            <div class="form-group">
+              <span>
+                สถานะ
+                <label class="switch" style="margin-left: 15.7px">
+                  <input type="checkbox" id="status" />
+                  <span class="slider round"></span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="add_coupon()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### ADD coupon #################################### -->
+
+    <!-- #################################### ADD Group coupon #################################### -->
+    <div class="modal fade" id="add_group_coupon" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">เพิ่มกลุ่มคูปอง</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> Group Name </label>
+              <input
+                type="text"
+                id="group_name"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> Group Bonus </label>
+              <input
+                type="number"
+                id="group_bonus"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">Group Amount</label>
+              <input
+                type="number"
+                id="group_amount"
+                value="0"
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label class="active">วันหมดอายุ</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                id="group_date_exp"
+              />
+            </div>
+            <div class="form-group">
+              <span>
+                สถานะ
+                <label class="switch" style="margin-left: 15.7px">
+                  <input type="checkbox" id="group_status" />
+                  <span class="slider round"></span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="add_group_coupon()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### ADD Group coupon #################################### -->
+
+    <!-- #################################### Show Detail coupon #################################### -->
+    <div class="modal fade" id="show_coupon" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">ชุดคูปอง</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div style="overflow-x: auto; text-align: center">
+              <table>
+                <tbody>
+                  <tr>
+                    <th style="width: 60%">รหัสคูปอง</th>
+                    <th style="width: 60%">สถานะ</th>
+                  </tr>
+                </tbody>
+                <tbody id="tbl_coupon"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### Show Detail coupon #################################### -->
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

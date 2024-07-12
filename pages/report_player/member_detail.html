@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+    <link href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css" rel="stylesheet">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css">
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepicker.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <div class="content">
+                <!-- หวยยี่กี Type-->
+                <h5 id="htext" style="display: block;">การจัดการสมาชิก</h5>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header border-0 pt-4" style="background-color: green;">
+                                    <h4 style="color: white;">
+                                        สมาชิก<i class="fa-solid fa-arrow-rotate-right" type="button" onClick="location.href=location.href" style="float: right; margin-left: 10px;"></i>
+                                    </h4>
+                                    <P style="color: white;" id="ptext">รายละเอียดสมาชิก</P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html" style="margin-left: 20px;">กลับ</a>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-light">
+                            <div class="card-header">
+
+                                <h3 class="card-title">รายการบัญชีสมาชิก</h3>
+                                <button type="submit" class="btn btn-primary" style="float: right; margin-left: 25cm; margin-bottom: 20px;">
+                                    <i class="fa-solid fa-plus"></i>
+                                    เพิ่ม
+                                </button>
+                            </div>
+
+                            <div class="card-body">
+                                <div style="float: right;">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+
+                                <div class="row" style="margin-left: 20px;">
+
+                                    <div class="col-md-4">
+                                        <p>ธนาคาร</p>
+                                        <p>ชื่อ-นามสกุล</p>
+                                        <p>สถานะ</p>
+                                        <p>กระทำโดย</p>
+                                        <p>หมายเหตุ</p>
+                                        <p>เปิดใช้งาน</p>
+                                    </div>
+                                    <div class="col-md-8 text-secondary">
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p><label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <a style="margin-left: 10px;"></a>เปิด</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title">การเป็นหุ้นส่วน</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>เปิดใช้งานการเป็นหุ้นส่วน<label class="switch" style="margin-left: 20px;">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <a style="margin-left: 10px;"></a>ปิด</p>
+
+                                <div class="card-body">
+                                    <p>
+                                        ประวัติการแก้ไข
+                                    </p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center;">เปิด/ปิด</th>
+                                                <th style="text-align:center;">หุ้นหวย</th>
+                                                <th style="text-align:center;">หุ้นเกม</th>
+                                                <th style="text-align:center;">แก้ไขโดย</th>
+                                                <th style="text-align:center;">แก้ไขเมื่อ</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title">รายละเอียดสมาชิก</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" style="margin-left: 20px;">
+                                    <div class="col-md-4">
+                                        <p>ชื่อผู้ใช้</p>
+                                        <p>เบอร์โทรศัพท์</p>
+                                        <p>สายรหัสสมาชิก</p>
+                                        <p>ช่องทางการสมัคร</p>
+                                        <p>วันที่สมัคร</p>
+                                        <p>สมัครโดย</p>
+                                        <p>ที่มาล่าสุด</p>
+                                        <p>ที่มาครั้งแรก</p>
+                                        <p>เข้าสู่ระบบล่าสุด</p>
+                                        <p>VIP</p>
+                                        <p>เปิดใช้งาน</p>
+                                        <p style="margin-top: 35px;"></p>
+                                        <p>ยืนยันเบอร์โทรศัพท์</p>
+                                    </div>
+                                    <div class="col-md-8 text-secondary">
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p>.</p>
+                                        <p><label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <a style="margin-left: 10px;"></a>ไม่ได้เป็น VIP</p>
+                                        <p><label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <a style="margin-left: 10px;"></a>เปิด</p>
+                                        <p><label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <a style="margin-left: 10px;"></a>ยืนยันแล้ว</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="card card-light">
+                    <div class="card-header">
+                        <h3 class="card-title">ธุรกรรมก่อนหน้า</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            ประวัติการแก้ไข
+                        </p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;" class="col-sm-3">ธุรกรรมบริษัท</th>
+                                    <th style="text-align:center;">สร้างเมื่อ</th>
+                                    <th style="text-align:center;">แก้ไขล่าสุด</th>
+                                    <th style="text-align:center;">ประเภท</th>
+                                    <th style="text-align:center;">จำนวนเงิน</th>
+                                    <th style="text-align:center;">สถานะ</th>
+                                    <th style="text-align:center;">ข้อมูลเพิ่มเติม</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="./js/total_huay.js"></script>
+</body>
+
+</html>

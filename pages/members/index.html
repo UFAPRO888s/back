@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico" />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css" />
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css" />
+    <style>
+        .btn-mo {
+            font-size: small !important;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align: center; padding: 20px">
+                            <h1>ระบบจัดการสมาชิก</h1>
+                        </div>
+                        <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header border-0 pt-4">
+                                    <h4><i class="fas fa-users"></i> จัดการสมาชิก</h4>
+                                    <a href="#" onclick="add_member()" class="btn btn-primary mt-3">
+                                        <i class="fas fa-plus"></i> เพิ่มยูสเซอร์
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <table id="logs" class="table table-hover" width="100%"></table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header border-0 pt-4">
+                                    <h4>
+                                        <i class="fas fa-users"></i>
+                                        จัดการสมาชิก UFABET
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <table id="logs_ufa" class="table table-hover" width="100%">
+                                    </table>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### ADD MEMBER #################################### -->
+    <form onsubmit="return addMember_modal()">
+        <div class="modal fade" id="add_member" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">แก้ไขข้อมูลสมาชิก</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+                    </div>
+                    <input type="hidden" id="id_member" value="" />
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                            <input type="text" class="form-control" id="add_username" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">รหัสผ่าน</label>
+                            <input type="text" class="form-control" id="add_password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ชื่อบัญชี</label>
+                            <input type="text" class="form-control" id="add_name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">เลขบัญชี</label>
+                            <input type="text" class="form-control" id="add_accnum" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ธนาคาร</label>
+                            <select id="add_bank" class="form-control">
+                  <option value="">เลือกธนาคาร</option>
+                  <option value="bbl">กรุงเทพ</option>
+                  <option value="scb">ไทยพาณิชย์</option>
+                  <option value="kbank">กสิกร</option>
+                  <option value="bay">กรุงศรีอยุธยา</option>
+                  <option value="ktb">กรุงไทย</option>
+                  <option value="ktb">กรุงไทย</option>
+                  <option value="tmb">ทหารไทย</option>
+                  <option value="tbank">ธนชาติ</option>
+                  <option value="gsb">ออมสิน</option>
+                  <option value="baac">เพื่อการเกษตรและสหกรณ์การเกษตร</option>
+                  <option value="uob">ยูโอบี</option>
+                  <option value="tisco">ทิสโก้</option>
+                  <option value="cimb">ซีไอเอ็มบีไทย</option>
+                  <option value="lhb">แลนด์แอนด์เฮ้าส์</option>
+                  <option value="truewallet">Truewallet</option>
+                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Line</label>
+                            <input type="text" class="form-control" id="add_line" />
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- #################################### ADD MEMBER #################################### -->
+
+    <!-- #################################### EDIT MEMBER #################################### -->
+    <div class="modal fade" id="edit_member" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">แก้ไขข้อมูลสมาชิก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div>
+                <input type="hidden" id="id_member" value="" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                        <input type="text" class="form-control" id="username" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">รหัสผ่าน</label>
+                        <input type="text" class="form-control" id="password" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อบัญชี</label>
+                        <input type="text" class="form-control" id="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">เลขบัญชี</label>
+                        <input type="text" class="form-control" id="accnum" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ธนาคาร</label>
+                        <select id="bank" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+                    <button type="button" class="btn btn-success" onclick="editMember_modal()">
+              Edit
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #################################### EDIT MEMBER #################################### -->
+
+    <!-- #################################### MANAGE CREDIT #################################### -->
+    <div class="modal fade" id="manage_credit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">ระบบจัดการเครดิต Wallet</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div>
+                <input type="hidden" id="id_member_credit" value="" />
+                <input type="hidden" id="credit_now" value="" />
+                <div class="modal-body">
+                    <div class="form-group" style="margin-bottom: 0">
+                        <label for="exampleInputEmail1" style="color: green">Username :
+              </label> &nbsp;
+                        <span id="username_credit" style="color: green">Waiting...</span>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0">
+                        <label for="exampleInputEmail1" style="color: blue">Credit Wallet :
+              </label> &nbsp;
+                        <span id="uername_credit" style="color: blue">Waiting...</span>
+                    </div>
+                    <!-- <div class="form-group" style="margin-bottom: 0;">
+                        <label for="exampleInputEmail1" style="color:rgb(209, 8, 192);">Turnover Today : </label> &nbsp;
+                        <span id="turnover_credit" style="color:rgb(209, 8, 192);">Waiting...</span>
+                    </div> -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="amount_credit" onchange="checkNumCredit()" placeholder="ใส่จำนวนที่ต้องการ" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-info" onclick="add_credit()">เพิ่มเครดิต</button> -->
+                    <button type="button" class="btn btn-danger" onclick="minus_credit()">
+              ถอนเครดิต
+            </button>
+                </div>
+                <!-- <div class="card-body">
+                    <table id="turnover_ufa" class="table table-hover" width="100%">
+                    </table>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- #################################### MANAGE CREDIT #################################### -->
+
+    <!-- #################################### MANAGE CREDIT #################################### -->
+    <div class="modal fade" id="view_transection" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">ธุรกรรมสมาชิก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="margin-bottom: 0">
+                        <label for="exampleInputEmail1" style="color: green">Username :
+              </label> &nbsp;
+                        <span id="username_transection" style="color: green">Waiting...</span
+              >
+            </div>
+          </div>
+          <div class="card-body">
+            <table
+              id="member_transection"
+              class="table table-hover"
+              width="100%"
+            ></table>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-info" onclick="add_credit()">เพิ่มเครดิต</button> -->
+            <!-- <button type="button" class="btn btn-danger" onclick="minus_credit()">ถอนเครดิต</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### MANAGE CREDIT #################################### -->
+
+    <!-- #################################### DETAIL Deposit/Withdraw #################################### -->
+    <div class="modal show fade" id="detail_transection" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h4>
+                                    สมาชิก : <span id="tran_username"></span> (<span id="tran_name"></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ธุรกรรม</th>
+                      <th>วันที่-เวลา</th>
+                      <th>จำนวนเงิน</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="tran_type"></td>
+                      <td id="tran_date"></td>
+                      <td id="tran_amount"></td>
+                      <td id="tran_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="tran_desciption"
+                    class="col-12"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Game #################################### -->
+    <div class="modal show fade" id="detail_game" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+                                    </button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h4>
+                                    สมาชิก : <span id="game_username"></span> (<span id="game_name"></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>วันที่-เวลา</th>
+                      <th>ประเภท</th>
+                      <th>เกม</th>
+                      <th>จำนวนเงิน</th>
+                      <th>แพ้ชนะ</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="game_date"></td>
+                      <td id="game_type"></td>
+                      <td id="game_game"></td>
+                      <td id="game_amount"></td>
+                      <td id="game_wl"></td>
+                      <td id="game_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="game_desciption"
+                    class="col-12 px-4"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Lotto #################################### -->
+    <div class="modal show fade" id="detail_lotto" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+                                    </button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h4>
+                                    สมาชิก : <span id="lotto_username"></span> (<span id="lotto_name"></span
+                  >)
+                </h4>
+                <h6>วันที่ <span id="lotto_date"></span></h6>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ประเภทหวย</th>
+                                                <th class="text-center">กลุ่มหวย</th>
+                                                <th class="text-center">เลขที่ซื้อ</th>
+                                                <th class="text-center">จำนวนเงิน</th>
+                                                <th class="text-center">ได้เสีย</th>
+                                                <th class="text-center">สถานะ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data_lotto"></tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2"></th>
+                                                <th class="text-center">รวม</th>
+                                                <th class="text-center" id="sum_amount"></th>
+                                                <th class="text-center" id="sum_wl"></th>
+                                                <th colspan="1"></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div class="row">
+                                        <div id="lotto_desciption" class="col-12 px-4" style="overflow-wrap: break-word"></div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- scripts -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+        <!-- datatables -->
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+        <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+        <script src="../../constants/apiPort.js"></script>
+        <script src="../../constants/statusTextRespone.js"></script>
+        <script src="../../constants/validateValue.js"></script>
+        <script src="../../constants/util.js"></script>
+        <script src="../../includes/navtest.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+        <script src="js/index.js"></script>
+</body>
+
+</html>

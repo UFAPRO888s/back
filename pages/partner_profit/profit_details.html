@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        div.scrollmenu {
+            background-color: #333;
+            overflow: auto;
+            white-space: nowrap;
+        }
+        
+        div.scrollmenu a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+        
+        div.scrollmenu a:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <h4 style="margin-left: 20px;">ยอดตามวันที่</h4>
+            <h4></h4>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header border-0 pt-4" style="background-color: green;">
+                                <h4 style="color: white;">
+                                    รายงานบัญชี
+                                </h4>
+                                <P style="color: white;">สรุปยอดรายได้ทั้งหมดตามวันที่</P>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ตั้งค่าความเสี่ยง-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container-fluid pt-4">
+                                <div class="row">
+                                    <div class="col-6 col-sm-3">
+                                        <div class="form-group">
+                                            <label>จากวันที่</label>
+                                            <input type="date" class="form-control" style="background-color: #e7e7e7; color: black;">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-3">
+                                        <div class="form-group">
+                                            <label>ถึงวันที่</label>
+                                            <input type="date" class="form-control" style="background-color: #e7e7e7; color: black;">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 30px;">
+                                        <div class="col-12">
+                                            <a class="btn btn-primary">วันที่</a>
+                                            <a class="btn btn-primary">เมื่อวาน</a>
+                                            <a class="btn btn-primary">อาทิตย์นี้</a>
+                                            <a class="btn btn-primary">อาทิตย์ที่แล้ว</a>
+                                            <a class="btn btn-primary">เดือนนี้</a>
+                                            <a class="btn btn-primary">เดือนที่แล้ว</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px;"></div>
+                                <div class="row" style="margin-left: 30px;">
+                                    <div class="col-12">
+                                        <a class="btn btn-success">ค้นหา</a>
+                                        <a class="btn btn-primary" style="margin-left: 50px;">ออกรายงาน</a>
+                                    </div>
+
+                                </div>
+                                <div style="padding: 30px;"></div>
+                                <div class="card-body" style="margin-left: 20px;">
+                                    <div class="row">
+                                        <span>ชื่อผู้ใช้ :</span>
+                                        <span style="margin-left: 30px;">ชื่อผู้ใช้ :</span>
+                                        <span style="margin-left: 30px;">ชื่อหุ้นส่วน :</span>
+                                        <span style="margin-left: 30px;">%หวย :</span>
+                                        <span style="margin-left: 30px;">%เกม :</span>
+                                    </div>
+                                    <div class="row" style="float: right;">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary btn-sm" disabled>ยอดตามวันที่</button>
+                                            <button type="submit" class="btn btn-success btn-sm">ยอดตามสมาชิก</button>
+                                            <button type="submit" class="btn btn-sm" style="background-color: orange; color: #e7e7e7;">ยอดตามสินค้า</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-outline card" style="border-radius: 0px !important;">
+
+                                    <div class="card-body">
+                                        <table class="table text-center col-sm-8" id="dtHorizontalExample">
+                                            <tr>
+                                                <th style=" border: 1px solid; border-color: #777;"></th>
+                                                <th style=" border: 1px solid; border-color: #777;"></th>
+                                                <th colspan="4" style=" border: 1px solid ; border-color: #777;">หวย</th>
+                                                <th colspan="4" style=" border: 1px solid;">Slot&Casino</th>
+                                            </tr>
+                                            <tr>
+                                                <td style=" border: 1px solid; border-color: #777;">วันที่</td>
+                                                <td style=" border: 1px solid; border-color: #777;">สมัครทั้งหมด</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดพนัน</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอด AFF</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดได้เสีย</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดรวม</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดพนัน</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอด AFF</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดได้เสีย</td>
+                                                <td style=" border: 1px solid; border-color: #777;">ยอดรวม</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--script show arrow-->
+    <script>
+        function Showcontent() {
+            var x = document.getElementById("showarrow");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

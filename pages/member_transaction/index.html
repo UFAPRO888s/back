@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepicker.js"></script>
+    <style>
+      body,
+      #app {
+        font-family: inherit !important;
+      }
+
+      .mo-bb {
+        font-size: inherit;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div id="app" class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <h1>ธุรกรรมสมาชิก</h1>
+              </div>
+              <div class="col-12 pb-3">
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  @click="callAll()"
+                >
+                  ทั้งหมด
+                </button>
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  @click="callDeposit()"
+                >
+                  ฝากเงิน
+                </button>
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  @click="callWithdraw()"
+                >
+                  ถอนเงิน
+                </button>
+                <button
+                  class="btn btn-info btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  @click="callWinloss()"
+                >
+                  แพ้/ชนะ
+                </button>
+                <br />
+                <br />
+                <div class="card shadow mb-5">
+                  <div class="card-header border-0 pt-4">
+                    <h4><i class="fas fa-users"></i> ธุรกรรมสมาชิก</h4>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="d-flex flex-wrap text-left">
+                        <div class="d-flex flex-wrap">
+                          <div class="d-flex flex-column form-group">
+                            <label>จากวันที่</label>
+                            <input
+                              type="text"
+                              name="startDate"
+                              id="startDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label>ถึงวันที่</label>
+                            <input
+                              type="text"
+                              name="endDate"
+                              id="endDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label class="text-white">*</label>
+                            <button
+                              class="form-control btn btn-outline-info"
+                              id="dash_0"
+                              @click="search()"
+                            >
+                              ค้นหา
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-wrap text-right pt-2">
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_3"
+                          @click="lastmonth()"
+                        >
+                          เดือนที่แล้ว
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_3"
+                          @click="thismonth()"
+                        >
+                          เดือนนี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_2"
+                          @click="lastweek()"
+                        >
+                          สัปดาห์ที่แล้ว
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_2"
+                          @click="thisweek()"
+                        >
+                          สัปดาห์นี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_1"
+                          @click="yesterday()"
+                        >
+                          เมื่อวานนี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_0"
+                          @click="today()"
+                        >
+                          วันนี้
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table id="logs" class="table table-hover" width="100%">
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### DETAIL Deposit/Withdraw #################################### -->
+    <div class="modal show fade" id="detail_transection" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>
+                  สมาชิก : <span id="tran_username"></span> (<span
+                    id="tran_name"
+                  ></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ธุรกรรม</th>
+                      <th>วันที่-เวลา</th>
+                      <th>จำนวนเงิน</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="tran_type"></td>
+                      <td id="tran_date"></td>
+                      <td id="tran_amount"></td>
+                      <td id="tran_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="tran_desciption"
+                    class="col-12"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Game #################################### -->
+    <div class="modal show fade" id="detail_game" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>
+                  สมาชิก : <span id="game_username"></span> (<span
+                    id="game_name"
+                  ></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>วันที่-เวลา</th>
+                      <th>ประเภท</th>
+                      <th>เกม</th>
+                      <th>จำนวนเงิน</th>
+                      <th>แพ้ชนะ</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="game_date"></td>
+                      <td id="game_type"></td>
+                      <td id="game_game"></td>
+                      <td id="game_amount"></td>
+                      <td id="game_wl"></td>
+                      <td id="game_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="game_desciption"
+                    class="col-12 px-4"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Lotto #################################### -->
+    <div class="modal show fade" id="detail_lotto" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>
+                  สมาชิก : <span id="lotto_username"></span> (<span
+                    id="lotto_name"
+                  ></span
+                  >)
+                </h4>
+                <h6>วันที่ <span id="lotto_date"></span></h6>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ประเภทหวย</th>
+                      <th class="text-center">กลุ่มหวย</th>
+                      <th class="text-center">เลขที่ซื้อ</th>
+                      <th class="text-center">จำนวนเงิน</th>
+                      <th class="text-center">ได้เสีย</th>
+                      <th class="text-center">สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="data_lotto"></tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="2"></th>
+                      <th class="text-center">รวม</th>
+                      <th class="text-center" id="sum_amount"></th>
+                      <th class="text-center" id="sum_wl"></th>
+                      <th colspan="1"></th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="lotto_desciption"
+                    class="col-12 px-4"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="js/index.js"></script>
+    <script></script>
+  </body>
+</html>

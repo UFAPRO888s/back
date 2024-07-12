@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepickerEN.js"></script>
+    <style>
+      body,
+      #app {
+        font-family: inherit !important;
+      }
+
+      .mo-bb {
+        font-size: inherit;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div id="app" class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <h1>ธุรกรรมสมาชิก</h1>
+              </div>
+              <div class="col-12 pb-3">
+                <br />
+                <div class="card shadow mb-5">
+                  <div class="card-header border-0 pt-4">
+                    <span>
+                      โหลดข้อมูลใหม่อัตโนมัติ
+                      <label class="switch" style="margin-left: 20px">
+                        <input
+                          type="checkbox"
+                          id="auto_refresh"
+                          onclick="setIntervalData()"
+                        />
+
+                        <span class="slider round"></span>
+                      </label>
+                    </span>
+                    <br />
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="d-flex flex-wrap text-left">
+                        <div class="d-flex flex-wrap">
+                          <div class="btn col-sm-4">
+                            <fieldset
+                              style="
+                                border: 1px solid rgb(112, 112, 112);
+                                cursor: default;
+                              "
+                            >
+                              <legend
+                                style="
+                                  text-align: center;
+                                  font-size: 14px;
+                                  max-width: 35%;
+                                "
+                              >
+                                ประเภท
+                              </legend>
+                              <input
+                                type="checkbox"
+                                name="checkAll"
+                                id="checkAll"
+                                onclick="Allcheck()"
+                                style="margin-left: 5px"
+                                checked
+                              /><label style="margin-left: 5px">ทั้งหมด</label>
+                              <input
+                                type="checkbox"
+                                name="checkDeposit"
+                                id="checkDeposit"
+                                style="margin-left: 5px"
+                                checked
+                              /><label style="margin-left: 5px">ฝาก</label>
+                              <input
+                                type="checkbox"
+                                name="checkWithdraw"
+                                id="checkWithdraw"
+                                style="margin-left: 5px"
+                                checked
+                              /><label style="margin-left: 5px">ถอน</label>
+                              <input
+                                type="checkbox"
+                                name="checkPub"
+                                id="checkPub"
+                                style="margin-left: 5px"
+                                checked
+                              /><label style="margin-left: 5px">ปรับยอด</label>
+                            </fieldset>
+                          </div>
+
+                          <div class="d-flex flex-column form-group">
+                            <label>จากวันที่</label>
+                            <input
+                              type="text"
+                              name="startDate"
+                              id="startDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label>ถึงวันที่</label>
+                            <input
+                              type="text"
+                              name="endDate"
+                              id="endDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label>ผู้ใช้งาน</label>
+                            <input
+                              type="text"
+                              name="username"
+                              id="username"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label class="text-white">*</label>
+                            <button
+                              class="form-control btn btn-outline-info"
+                              id="dash_0"
+                              onclick="setDataTransaction(true)"
+                            >
+                              ค้นหา
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table id="logs" class="table table-hover" width="100%">
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### DETAIL Deposit/Withdraw #################################### -->
+    <div class="modal show fade" id="detail_transection" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>
+                  สมาชิก : <span id="tran_username"></span> (<span
+                    id="tran_name"
+                  ></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ธุรกรรม</th>
+                      <th>วันที่-เวลา</th>
+                      <th>จำนวนเงิน</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="tran_type"></td>
+                      <td id="tran_date"></td>
+                      <td id="tran_amount"></td>
+                      <td id="tran_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="tran_desciption"
+                    class="col-12"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Game #################################### -->
+    <div class="modal show fade" id="detail_game" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>
+                  สมาชิก : <span id="game_username"></span> (<span
+                    id="game_name"
+                  ></span
+                  >)
+                </h4>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>วันที่-เวลา</th>
+                      <th>ประเภท</th>
+                      <th>เกม</th>
+                      <th>จำนวนเงิน</th>
+                      <th>แพ้ชนะ</th>
+                      <th>สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="game_date"></td>
+                      <td id="game_type"></td>
+                      <td id="game_game"></td>
+                      <td id="game_amount"></td>
+                      <td id="game_wl"></td>
+                      <td id="game_state"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="12">รายละเอียดเพิ่มเติม</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div
+                    id="game_desciption"
+                    class="col-12 px-4"
+                    style="overflow-wrap: break-word"
+                  ></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- #################################### DETAIL Lotto #################################### -->
+    <div class="modal show fade" id="detail_lotto" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">รายละเอียดข้อมูล</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true"
+                ><i class="fa fa-times-circle" aria-hidden="true"></i
+              ></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h1 class="text-header">กำลังปรับปรุง</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### DETAIL #################################### -->
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="js/index.js"></script>
+    <script></script>
+  </body>
+</html>

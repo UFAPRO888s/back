@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>จัดการแบ่งหุ้นสมาชิก</title>
+    <div w3-include-html="../includes/header.html"></div>
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/css/select2.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/css/select2-bootstrap.css"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div id="clone-content-list-member-partner" class="d-none">
+      <div class="row">
+        <div class="col-3 col-sm-2">
+          <div class="form-group">
+            <label>ประเภทแบ่งหุ้น</label>
+            <select
+              name="partner_type"
+              class="form-control"
+              style="width: 100%"
+              onchange="handleCheckPartnerType(this)"
+            >
+              <option value="PN">หุ้นส่วน</option>
+              <!-- <option value="AF">หุ้นลม</option> -->
+            </select>
+          </div>
+        </div>
+        <div class="col-3 col-sm-2">
+          <div class="form-group">
+            <label>ประเภท</label>
+            <select
+              name="member_type"
+              class="form-control"
+              style="width: 100%"
+              onchange="handleCheckPartnerType(this)"
+            >
+              <option value="senior">senior</option>
+              <option value="master">master</option>
+              <option value="agent">agent</option>
+              <option value="subagent">subagent</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4">
+          <div class="form-group">
+            <label>แบ่งหุ้น :</label>
+            <!-- เลขที่บัญชี :<label name="bankno" data-bankno=""></label>
+          ธนาคาร :<label name="bank" data-bank=""></label> -->
+            <select
+              name="member_id"
+              class="form-control select-member-children"
+              onchange="handleChangePartnerChildren(this)"
+            ></select>
+          </div>
+        </div>
+        <div class="col-3 col-sm-1">
+          <div class="form-group">
+            <label>(หวย)หุ้น%</label>
+            <input
+              type="number"
+              class="form-control"
+              name="pattner_percent_lotto"
+              maxlength="100"
+            />
+          </div>
+        </div>
+        <div class="col-3 col-sm-1">
+          <div class="form-group">
+            <label>(คาสิโน)หุ้น%</label>
+            <input
+              type="number"
+              class="form-control"
+              name="pattner_percent_game"
+              maxlength="100"
+            />
+          </div>
+        </div>
+        <div class="col-3 col-sm-2 pt-4">
+          <button
+            type="button"
+            class="btn btn-success mt-2"
+            click="addList(this)"
+          >
+            เพิ่ม
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger mt-2"
+            onclick="removeList(this)"
+          >
+            ลบ
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 20px">
+                <h1>จัดการแบ่งหุ้นสมาชิก</h1>
+              </div>
+
+              <div class="col-12">
+                <div class="card shadow">
+                  <div class="card-header border-0 pt-4">
+                    <h4>
+                      <i class="fas fa-users"></i>
+                      จัดการแบ่งหุ้นสมาชิก
+                    </h4>
+                    <a
+                      href="#"
+                      onclick="handleModal('add')"
+                      class="btn btn-primary mt-3"
+                    >
+                      <i class="fas fa-plus"></i>
+                      เพิ่มแบ่งหุ้นสมาชิค
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table
+                        class="table table table-bordered"
+                        id="table-member-partner"
+                        width="100%"
+                      ></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### ADD MEMBER #################################### -->
+    <form id="form-member-partner">
+      <input type="hidden" id="form-id" name="id" value="0" />
+      <div class="modal fade" id="modal-member-partner" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <h4 class="modal-title">
+                <i class="fa fa-user-plus"></i> แบ่งหุ้นสมาชิค
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <input type="hidden" id="id_member" value="" />
+            <div class="modal-body">
+              <div class="form-group" id="groupSelectPartner">
+                <label
+                  >Partner : ชื่อ : <span id="partnerName"></span> ธนาคาร :
+                  <span id="partnerBank"></span> เลขที่บัญชี :
+                  <span id="partnerBankNo"></span> (หวย)หุ้น% :
+                  <span id="partnerPercentLotto"></span> (คาสิโน)หุ้น% :
+                  <span id="partnerPercentGame"></span>
+                </label>
+                <select
+                  name="partner_member_id"
+                  id="select-member"
+                  onchange="handleChangePartner(this)"
+                  style="width: 100%"
+                  class="form-control select2"
+                ></select>
+              </div>
+              <div class="form-group" id="groupSelectPartnerDetail">
+                <label
+                  >Partner : ชื่อ : <span id="partnerNameDetail"></span> ธนาคาร
+                  : <span id="partnerBankDetail"></span> เลขที่บัญชี :
+                  <span id="partnerBankNoDetail"></span> (หวย)หุ้น% :
+                  <span id="partnerPercentLottoDetail"></span> (คาสิโน)หุ้น% :
+                  <span id="partnerPercentGameDetail"></span>
+                </label>
+              </div>
+              <!-- =========== List Partner ============ -->
+              <hr />
+              <div id="content-list-partner">
+                <div class="row">
+                  <div class="col-3 col-sm-2">
+                    <div class="form-group">
+                      <label>ประเภทแบ่งหุ้น</label>
+                      <select
+                        name="partner_type"
+                        class="form-control select2"
+                        style="width: 100%"
+                        onchange="handleCheckPartnerType(this)"
+                      >
+                        <option value="PN">หุ้นส่วน</option>
+                        <!-- <option value="AF">หุ้นลม</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3 col-sm-2">
+                    <div class="form-group">
+                      <label>ประเภท</label>
+                      <select
+                        name="member_type"
+                        class="form-control"
+                        style="width: 100%"
+                        onchange="handleCheckPartnerType(this)"
+                      >
+                        <option value="senior">senior</option>
+                        <option value="master">master</option>
+                        <option value="agent">agent</option>
+                        <option value="subagent">subagent</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="form-group">
+                      <label>แบ่งหุ้น</label>
+                      <!-- เลขที่บัญชี :<label name="bankno" data-bankno=""></label>
+                    ธนาคาร :<label name="bank" data-bank=""></label> -->
+                      <select
+                        name="member_id"
+                        id="select-member-children"
+                        style="width: 100%"
+                        class="form-control select2"
+                        onchange="handleChangePartnerChildren(this)"
+                      ></select>
+                    </div>
+                  </div>
+                  <div class="col-3 col-sm-1">
+                    <div class="form-group">
+                      <label>(หวย)หุ้น%</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="pattner_percent_lotto"
+                        maxlength="100"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-3 col-sm-1">
+                    <div class="form-group">
+                      <label>(คาสิโน)หุ้น%</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="pattner_percent_game"
+                        maxlength="100"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-3 col-sm-1 pt-4">
+                    <button
+                      type="button"
+                      id="defualt-btn-add"
+                      class="btn btn-success mt-2"
+                      onclick="addList(this)"
+                    >
+                      เพิ่ม
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- =========== End List ============ -->
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                id="btn-submit"
+                class="btn btn-info"
+                onclick="handleSubmit()"
+              >
+                บันทึก
+              </button>
+              <button
+                type="button"
+                onclick="resetContentListPartner()"
+                class="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- #################################### ADD MEMBER #################################### -->
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/js/select2.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

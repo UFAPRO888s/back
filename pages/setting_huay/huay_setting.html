@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <h4 style="margin-left: 20px;">การตั้งค่าสินค้า</h4>
+            <h4></h4>
+            <!--ตั้งค่าความเสี่ยง-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container-fluid pt-4">
+                                <h5>
+                                    ตั้งค่าความเสี่ยงของบริษัท และ อัตราจ่าย
+                                </h5>
+                                <form method="post" id="formSetting">
+
+                                    <div class="card card-outline card-dark" style="border-radius: 0px !important;">
+                                        <div class="card-header">
+                                            <h3 class="card-title"> ตั้งค่าทั่วไป</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label>ชื่อหวย</label>
+                                                <input type="hidden" name="lotto_type[1][id]" id="lottoTypeId" value="">
+                                                <input type="text" class="form-control" name="lotto_type[1][lotto_name]" id="lottoName" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>เปิดรับแทงเวลา</label>
+                                                <input type="text" class="form-control" name="lotto_type[1][lotto_date_open]" id="lottoDate" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>ปิดรับแทงเวลา</label>
+                                                <input type="text" class="form-control" name="lotto_type[1][lotto_date]" id="lottoDateClose" readonly>
+                                            </div>
+                                            <div style="display:block" id="yikee_div">
+                                                <div class="form-group yeekee">
+                                                    <label>เปอร์เซ็นขั้นต่ำ(กำไรยี่กี)</label>
+                                                    <input type="number" class="form-control" name="lotto_type[1][profit_min]" id="lottoProfitMin">
+                                                </div>
+                                                <div class="form-group yeekee">
+                                                    <label>เปอร์เซ็นสูงสุด(กำไรยี่กี)</label>
+                                                    <input type="number" class="form-control" name="lotto_type[1][profit_max]" id="lottoProfitMax">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="card card-outline card-dark" style="border-radius: 0px !important;">
+                                        <div class="card-header">
+                                            <h3 class="card-title"> ประเภทหวยและอัตราการจ่าย</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">เกมส์</th>
+                                                        <th scope="col">สถานะ</th>
+                                                        <th scope="col">ต่ำสุดต่อเลข</th>
+                                                        <th scope="col">สูงสุดต่อเลข</th>
+                                                        <th scope="col">อัตราการจ่าย</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyContentLottoType">
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="card card-outline card-dark" style="border-radius: 0px !important;">
+                                        <div class="card-header">
+                                            <h3 class="card-title"> ตั้งค่าความเสี่ยงของบริษัทและอัตราการจ่าย</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body" id="lottoConfigLimit">
+
+                                        </div>
+                                        <div class="card-footer p-5">
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <button type="button" onclick="handleSubmit()" class="btn btn-primary">บันทึก</button>
+                                                    <button type="button" class="btn btn-secondary">ยกเลิก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--script show arrow-->
+    <script>
+        function Showcontent() {
+            var x = document.getElementById("showarrow");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="./js/huay_setting.js"></script>
+</body>
+
+</html>

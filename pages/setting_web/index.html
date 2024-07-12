@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">dashboard</h3>
+                                </div>
+                                <br>
+                                <div class="row text-center" style="margin-left: 40px; margin-right: 40px;">
+                                    <div class="col-lg-3 col-6">
+                                        <div class="small-box shadow" style="background-color: #81CACF !important;">
+                                            <div class="inner text-center" style="color: white;">
+                                                <h1 class="py-3" style="color: white;">&nbsp;เครดิตยูฟ่า&nbsp;</h1>
+                                                <i class="fa-solid fa-dollar-sign" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer py-3"></i>
+                                                <h4 id="dashboard_credit_ufa">0</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-6">
+                                        <div class="small-box  shadow" style="background-color: #5584AC !important;">
+                                            <div class="inner text-center" style="color: white;">
+                                                <h1 class="py-3" style="color: white;">สมาชิกยูฟ่า</h1>
+                                                <i class="fa-solid fa-user" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer py-3"></i>
+                                                <h4 id="dashboard_member_ufa">0</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-6">
+                                        <div class="small-box shadow" style=" background-color: #76BA99 !important">
+                                            <div class="inner text-center" style="color: white;">
+                                                <h1 class="py-3" style="color: white;">ยอดรวมฝากทั้งหมด</h1>
+                                                <i class="fa-solid fa-money-bill-transfer" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer py-3"></i>
+                                                <h4 id="dashboard_deposit_all">0</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-6">
+                                        <div class="small-box shadow" style="background-color: #CA4E79 !important;">
+                                            <div class="inner text-center" style="color: white;">
+                                                <h1 class="py-3" style="color: white;">ยอดรวมถอนทั้งหมด</h1>
+                                                <i class="fa-solid fa-money-bill-transfer" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer py-3"></i>
+                                                <h4 id="dashboard_withdraw_all">0</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title"> ตั้งค่าระบบ</h3>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card card-light" style="
+                                        margin-left: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">General Setting</h3>
+                                            </div>
+
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ไอดีไลน์</label>
+                                                    <input type="text" class="form-control" id="line_id">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ไอดีไลน์ (สำหรับสมัครผ่านแอดมิน)</label>
+                                                    <input type="text" class="form-control" id="line_admin">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ชื่อเว็บ</label>
+                                                    <input type="text" class="form-control" id="name_web">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">เติมขั้นต่ำ</label>
+                                                    <input type="text" class="form-control" id="d_limit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ถอนขั้นต่ำ</label>
+                                                    <input type="text" class="form-control" id="w_limit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ถอนขั้นต่ำ (Truewallet)</label>
+                                                    <input type="text" class="form-control" id="w_limit_twl">
+                                                </div>
+                                                <div class="card-footer" style="padding:0px;">
+                                                    <button id="edit_general_setting" class="btn btn-primary" style="width: 100%;">บันทึก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-light" style="margin-left: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">ตั้งค่าระบบถอนออโต้</h3>
+                                            </div>
+
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">เครดิตต่ำสุดที่ถอนได้</label>
+                                                    <input type="text" class="form-control" id="credit_min">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">เครดิตสูงสุดที่ถอนได้</label>
+                                                    <input type="text" class="form-control" id="credit_max">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">เครดิตลิมิต / วัน</label>
+                                                    <input type="text" class="form-control" id="credit_limit">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">สถานะ</label><br>
+                                                    <input type="radio" name="status" id="status_1" value="1" checked>
+                                                    <label for="male">เปิดใช้งาน</label><br>
+                                                    <input type="radio" name="status" value="0" id="status_0">
+                                                    <label for="male">ปิดใช้งาน</label><br>
+                                                </div>
+                                                <div class="card-footer" style="padding:0px;">
+                                                    <button id="edit_auto_setting" class="btn btn-primary" style="width: 100%;">บันทึก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card card-light" style="margin-left: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">ตั้งค่าเว็บ</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <span>
+                                                            ตั้งค่า UFA <label class="switch"
+                                                                style="margin-left: 15.7px;">
+                                                                <input type="checkbox" id="ufa_settings" onclick="updateStatusWeb()">
+                                                                <span class="slider round"></span>
+                                                        </label><a style="margin-left: 40px;">(เปิด/ปิด)</a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span>
+                                                            ตั้งค่า LOTTO <label class="switch">
+                                                                <input type="checkbox" id="lotto_settings" onclick="updateStatusWeb()">
+                                                                <span class="slider round"></span>
+                                                        </label><a style="margin-left: 40px;">(เปิด/ปิด)</a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span>
+                                                            โยกเงินออโต้ <label class="switch">
+                                                                <input type="checkbox" id="transfer_auto" onclick="updateStatusWeb()">
+                                                                <span class="slider round"></span>
+                                                        </label><a style="margin-left: 40px;">(เปิด/ปิด)</a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">โอนเมื่อยอดถึง</label>
+                                                        <input type="text" class="form-control" id="amount_auto">
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer" style="padding:0px;">
+                                                    <button class="btn btn-primary" style="width: 100%;" onclick="updateStatusWeb()">บันทึก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card card-light" style="margin-right: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Notify Line Token</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Token (แจ้งเตือนสมัครสมาชิก)</label>
+                                                    <input type="text" class="form-control" id="token_line">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Token (แจ้งเตือนเข้าเล่นเกม)</label>
+                                                    <input type="text" class="form-control" id="token_line_game">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Token (แจ้งเตือนการฝากเงิน)</label>
+                                                    <input type="text" class="form-control" id="token_line_depo">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Token (แจ้งเตือนการถอนเงิน)</label>
+                                                    <input type="text" class="form-control" id="token_line_with">
+                                                </div>
+                                                <div class="card-footer" style="padding:0px;">
+                                                    <button id="edit_notify_setting" class="btn btn-primary" style="width: 100%;">บันทึก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-light" style="margin-right: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">True Wallet OTP</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-inline">
+                                                    <div class="form-group mb-2">
+                                                        <label for="staticEmail2" class="">เบอร์ Truewallet : </label>
+                                                    </div>
+                                                    <div class="form-group mx-sm-3 mb-2">
+                                                        <input type="text" class="form-control" id="truewallet_phone" placeholder="เบอร์ Truewallet">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-info mb-2" onclick="otp_truewallet()">OTP</button>
+                                                </div>
+                                                <div style="display:none" id="div_otp">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">REF : </label>
+                                                        <input type="text" class="form-control" id="truewallet_ref" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">OTP : </label>
+                                                        <input type="text" class="form-control" id="truewallet_otp">
+                                                    </div>
+                                                    <div class="card-footer" style="padding:0px;">
+                                                        <button class="btn btn-primary" style="width: 100%;" onclick="otp_register()">บันทึก</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card card-light" style="margin-right: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">ตั้งค่าระบบ True Wallet</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">โอนยอดอัตโนมัติเมื่อยอด</label>
+                                                    <input type="text" class="form-control" id="truewallet_amount">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">เบอร์ที่ต้องการโอนออก</label>
+                                                    <input type="text" class="form-control" id="truewallet_phone_exchange">
+                                                </div>
+                                                <div class="form-group">
+                                                    <span>
+                                                        สถานะ <label class="switch">
+                                                            <input type="checkbox" id="truewallet_status">
+                                                            <span class="slider round"></span>
+                                                    </label><a style="margin-left: 20px;">(เปิด/ปิด)</a>
+                                                    </span>
+                                                </div>
+
+                                                <div class="card-footer" style="padding:0px;">
+                                                    <button class="btn btn-primary" style="width: 100%;" onclick="save_truewallet()">บันทึก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-light" style="margin-right: 20px;">
+                                            <div class="card-header">
+                                                <h3 class="card-title">ระบบโยกเงิน</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="bank_setting_sel" onchange="onChangeSelBankType()">
+                                                        <option>เลือกประเภท</option>
+                                                        <option value="truewallet">True Wallet</option>
+                                                        <option value="bank">Bank</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">บัญชีเงินฝาก</label>
+                                                    <select class="form-control" id="bank_deposit" disabled>
+                                                        <option>เลือกประเภท</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">บัญชีเงินถอน</label>
+                                                    <select class="form-control" id="bank_withdraw" disabled>
+                                                        <option>เลือกประเภท</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">จำนวนเงิน</label>
+                                                    <input type="text" class="form-control" id="change_money">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-success" style="width: 100%;border-radius: 10px;" onclick="ExchangeAccount(0)">บัญชีเงินฝาก ไปยัง
+                                                        บัญชีถอนเงิน</button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-warning" style="width: 100%;border-radius: 10px;" onclick="ExchangeAccount(1)">บัญชีถอนเงิน ไปยัง
+                                                        บัญชีเงินฝาก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" style="margin-bottom: 50px;">
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title"> ตั้งค่า คืนยอดเสีย</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>คืนยอดเสียทุกๆวัน :</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <select class="form-control" id="sel_days">
+                                                <option value="-1">เลือกวันที่ต้องการ</option>
+                                                <option value="0">วันอาทิตย์</option>
+                                                <option value="1">วันจันทร์</option>
+                                                <option value="2">วันอังคาร</option>
+                                                <option value="3">วันพุธ</option>
+                                                <option value="4">วันพฤหัสบดี</option>
+                                                <option value="5">วันศุกร์</option>
+                                                <option value="6">วันเสาร์</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>เปอเซ็นการคืน</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="text" class="form-control text-center " placeholder="0" id="amount">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>Description</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <textarea rows="10" class="form-control" id="desc"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>รูปภาพ </label>
+                                                <label style="color:red">(แนะนำ 639x373)</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="hidden" class="file-control" id="url_file">
+                                            <input type="file" class="file-control" style="width: 200px;" name="file" id="file">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>สถานะ</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <label class="switch">
+                                                <input type="checkbox" id="winloss_setting">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-success" onclick="edit_setting_winloss()">บันทึก</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+    <!-- <script src="./js/dashboard.js"></script> -->
+
+</body>
+
+</html>

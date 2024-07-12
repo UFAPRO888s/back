@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>จัดการแบ่งหุ้นสมาชิก</title>
+    <div w3-include-html="../includes/header.html"></div>
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/css/select2.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/css/select2-bootstrap.css"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div id="app">
+              <div class="row">
+                <div
+                  class="col-sm-12"
+                  style="text-align: center; padding: 20px"
+                >
+                  <h1>จัดการแบ่งหุ้นสมาชิก</h1>
+                </div>
+
+                <div class="col-12">
+                  <div class="card shadow">
+                    <div class="card-header border-0 pt-4">
+                      <h4><i class="fas fa-users"></i> จัดการแบ่งหุ้นสมาชิก</h4>
+                      <button @click="handleShow" class="btn btn-primary mt-3">
+                        <i class="fas fa-plus"></i>
+                        เพิ่ม Senior
+                      </button>
+                    </div>
+                    <div class="card-body">
+                      <button
+                        type="button"
+                        v-if="searchData.historyDetailChild.length > 1"
+                        @click="btnBack"
+                        class="btn btn-light mb-3"
+                      >
+                        ย้อนกลับ
+                      </button>
+                      <div class="table-responsive">
+                        <table
+                          class="table table table-bordered"
+                          id="table-member-partner"
+                          width="100%"
+                        >
+                          <thead>
+                            <tr class="text-center">
+                              <th>ลำดับ</th>
+                              <th>ระดับหุ้นส่วน</th>
+                              <th>ชื่อผู้ใช้</th>
+                              <th>จำนวนสมาชิก</th>
+                              <th>จัดการ</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr
+                              class="text-center"
+                              v-for="(item,key) in tableData"
+                              :key="key"
+                            >
+                              <td>{{++key}}</td>
+                              <td>
+                                <span class="badge badge-primary"
+                                  >{{item.type_name}}</span
+                                >
+                              </td>
+                              <td>{{item.name}}</td>
+                              <td>
+                                <a href="#" @click="handleTable(item.member_id)"
+                                  >{{item.countmember}}</a
+                                >
+                              </td>
+                              <td>
+                                <div class="btn-group" role="group">
+                                  <button
+                                    type="button"
+                                    class="btn btn-warning btn-sm"
+                                    @click="handleEdit(item)"
+                                  >
+                                    <i class="far fa-edit"></i> แก้ไข
+                                  </button>
+                                  &nbsp;
+                                  <button
+                                    v-if="false"
+                                    type="button"
+                                    class="btn btn-danger btn-sm"
+                                    @click="handleDelete(item)"
+                                  >
+                                    <i class="far fa-trash-alt"></i> ลบ
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Member Partner -->
+              <div
+                class="modal fade"
+                id="modal-member-partner"
+                data-backdrop="static"
+                data-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                      <h4 class="modal-title">
+                        <i class="fa fa-user-plus"></i> {{ showTitleModal }}
+                      </h4>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <input type="hidden" id="id_member" value="" />
+                    <div class="modal-body">
+                      <div v-if="this.stateTitleModal === 0">
+                        <div class="row" v-if="initData.isShowSelectPartner">
+                          <div class="col-2">
+                            <div class="form-group">
+                              <label>ประเภท</label>
+                              <select
+                                name="member_type"
+                                v-select="formData.valPartnerType"
+                                v-model="formData.valPartnerType"
+                                class="form-control select2"
+                                style="width: 100%"
+                                @change="handleCheckPartnerType"
+                              >
+                                <option
+                                  :value="item.id"
+                                  v-for="item in initData.selectTypePartner"
+                                >
+                                  {{item.name}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-10">
+                            <div class="form-group" id="groupSelectPartner">
+                              <label
+                                >Partner : ชื่อ :
+                                <span>{{formData.detailPartner.name}}</span>
+                                ธนาคาร :
+                                <span
+                                  >{{formData.detailPartner.bank_name}}</span
+                                >
+                                เลขที่บัญชี :
+                                <span>{{formData.detailPartner.accnum}}</span>
+                                (หวย)หุ้น% :
+                                <span
+                                  >{{formData.detailPartner.percent_lotto}}</span
+                                >
+                                (คาสิโน)หุ้น% :
+                                <span
+                                  >{{formData.detailPartner.percent_game}}</span
+                                >
+                              </label>
+                              <select
+                                v-model="formData.valPartnerId"
+                                v-select="formData.valPartnerId"
+                                @change="checkSelectPartner"
+                                class="form-control select2"
+                                style="width: 100%"
+                              >
+                                <option
+                                  :value="item.id"
+                                  v-for="(item,key) in initData.selectPartner"
+                                >
+                                  {{item.name}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                      </div>
+                      <!-- =========== List Partner ============ -->
+                      <div id="content-list-partner">
+                        <div
+                          class="row"
+                          v-for="(item,key) in formData.childPartner"
+                        >
+                          <div class="col-3 col-sm-2">
+                            <div class="form-group">
+                              <label>ประเภทแบ่งหุ้น</label>
+                              <select
+                                v-model="item.partner_type"
+                                v-select="item.partner_type"
+                                class="form-control select2"
+                                style="width: 100%"
+                              >
+                                <option value="PN">หุ้นส่วน</option>
+                                <option value="AF" v-if="false">หุ้นลม</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-3 col-sm-2">
+                            <div class="form-group">
+                              <label>ประเภท</label>
+                              <select
+                                name="member_type"
+                                class="form-control select2"
+                                v-model="item.member_type_id"
+                                v-select="item.member_type_id"
+                                style="width: 100%"
+                              >
+                                <option
+                                  :value="item.id"
+                                  v-if="addMode(item)"
+                                  v-for="item in initData.selectTypePartnerChild"
+                                >
+                                  {{item.name}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                              <label>แบ่งหุ้น</label>
+                              <select
+                                class="form-control select2"
+                                v-model="item.member_id"
+                                v-select="item.member_id"
+                                style="width: 100%"
+                              >
+                                <option
+                                  :value="item.id"
+                                  v-for="(item,key) in initData.selectChildPartner"
+                                >
+                                  {{item.name}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-3 col-sm-1">
+                            <div class="form-group">
+                              <label>(หวย)หุ้น%</label>
+                              <input
+                                type="number"
+                                @keyup="checkMax($event,'lotto',key)"
+                                v-model="item.percent_lotto"
+                                class="form-control"
+                                name="pattner_percent_lotto"
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-3 col-sm-1">
+                            <div class="form-group">
+                              <label>(คาสิโน)หุ้น%</label>
+                              <input
+                                type="number"
+                                v-model="item.percent_game"
+                                @keyup="checkMax($event,'game',key)"
+                                class="form-control"
+                                name="pattner_percent_game"
+                                maxlength="100"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 col-sm-2 pt-4">
+                            <button
+                              type="button"
+                              class="btn btn-success mt-2"
+                              @click="addList(key)"
+                            >
+                              เพิ่ม
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger mt-2"
+                              :disabled="formData.childPartner.length < 2"
+                              @click="removeList(key)"
+                            >
+                              ลบ
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- =========== End List ============ -->
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-info"
+                        @click="handleSubmit()"
+                      >
+                        บันทึก
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Member Partner -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/select2/js/select2.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/vue@2.7.8"></script> -->
+    <script src="./js/index-vue.js"></script>
+  </body>
+</html>

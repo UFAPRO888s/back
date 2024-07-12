@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepicker.js"></script>
+    <style>
+      .scb {
+        color: #fff;
+        background-color: #5c2583 !important;
+      }
+
+      .truewallet {
+        color: #000;
+        background-color: #ff8300 !important;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card shadow">
+                  <div class="card-header border-0 pt-4">
+                    <h4><i class="fas fa-users"></i> บัญชีฝากเงิน</h4>
+                    <button
+                      class="btn btn-info btn-lg waves-effect waves-light"
+                      id="balance_pro2"
+                      onclick="add_deposit_modal()"
+                    >
+                      <i class="fa-solid fa-plus"></i> เพิ่มบัญชี
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card shadow">
+                  <div class="card-header border-0 pt-4">
+                    <h4><i class="fas fa-users"></i> บัญชีถอนเงิน</h4>
+                    <button
+                      class="btn btn-info btn-lg waves-effect waves-light"
+                      id="balance_pro2"
+                      onclick="add_withdraw_modal()"
+                    >
+                      <i class="fa-solid fa-plus"></i> เพิ่มบัญชี
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      id="logs1"
+                      class="table table-hover"
+                      width="100%"
+                    ></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- #################################### EDIT ACCOUNT DEPOSIT #################################### -->
+    <div class="modal fade" id="edit_Deposit" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">แก้ไขบัญชีฝากเงิน</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            value=""
+            id="edit_deposit"
+          />
+
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active" id="head_deposit"> </label>
+            </div>
+            <div class="form-group">
+              <label class="active" id="edit_deposit_txt_device"> Device ID </label>
+              <input
+                type="text"
+                id="device_deposit"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active" id="edit_deposit_txt_pin"> PIN </label>
+              <input
+                type="text"
+                id="pin_deposit"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group" id="edit_deposit_ipt_token">
+              <label class="active"> TOKEN </label>
+              <input
+                type="text"
+                id="token_deposit"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="edit_Deposit()"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### EDIT ACCOUNT DEPOSIT #################################### -->
+
+    <!-- #################################### EDIT ACCOUNT WITHDRAW #################################### -->
+    <div class="modal fade" id="edit_withdraw" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">แก้ไขบัญชีถอนเงิน</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            value=""
+            id="edit_withdraw"
+          />
+          <div class="card-body">
+            <div class="form-group">
+              <div class="form-group">
+                <label class="active" id="head_withdraw"> </label>
+              </div>
+              <label class="active"> Device ID </label>
+              <input
+                type="text"
+                id="device_withdraw"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> PIN </label>
+              <input
+                type="text"
+                id="pin_withdraw"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="edit_withdraw()"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### EDIT ACCOUNT WITHDRAW #################################### -->
+
+    <!-- #################################### ADD DEPOSIT #################################### -->
+    <div class="modal fade" id="add_deposit" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">เพิ่มบัญชีฝาก</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> ประเภท </label>
+              <select class="form-control" id="type_deposit_add">
+                <option value="scb">SCB</option>
+                <option value="truewallet">TRUE Wallet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="active"> ชื่อบัญชี </label>
+              <input
+                type="text"
+                id="name_deposit_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active" id="add_txt_account"> เลขบัญชี </label>
+              <input
+                type="text"
+                id="acc_deposit_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active" id="add_txt_username"> Device ID </label>
+              <input
+                type="text"
+                id="device_deposit_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active" id="add_txt_password"> PIN </label>
+              <input
+                type="text"
+                id="pin_deposit_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+            <div class="form-group" id="add_div_token" style="display: none;">
+              <label class="active"> TOKEN </label>
+              <input
+                type="text"
+                id="token_deposit_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="add_deposit()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### ADD DEPOSIT #################################### -->
+
+    <!-- #################################### ADD WITHDRAW #################################### -->
+    <div class="modal fade" id="add_withdraw" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">เพิ่มบัญชีถอน</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="active"> ประเภท </label>
+              <select class="form-control" id="type_withdraw_add">
+                <option value="scb">SCB</option>
+                <option value="truewallet">TRUE Wallet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="active"> ชื่อบัญชี </label>
+              <input
+                type="text"
+                id="name_withdraw_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> เลขบัญชี </label>
+              <input
+                type="text"
+                id="acc_withdraw_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> Device ID </label>
+              <input
+                type="text"
+                id="device_withdraw_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="active"> PIN </label>
+              <input
+                type="text"
+                id="pin_withdraw_add"
+                value=""
+                class="form-control"
+                required=""
+              />
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="add_withdraw()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #################################### ADD WITHDRAW #################################### -->
+
+    <div class="modal fade" id="balance_info" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header text-dark card-ai">
+            <p class="modal-title" id="mediumModalLabel">ยอดเงินคงเหลือ</p>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <center>
+              <div class="col-md-6 mb-2">
+                <div class="list-group-item" id="bg-modal-bank">
+                  <div class="d-flex w-100 justify-content-between">
+                    <div style="text-align: left">
+                      <h5 class="mb-1 text-light" id="accnum">Waiting...</h5>
+                      <div class="small">
+                        <span>ชื่อบัญชี : </span>
+                        <span id="name_account"> Waiting...</span> <br /><span
+                          id="name_bank"
+                          >Waiting...</span
+                        ><br />
+                        <span id="balance_amount">Waiting...</span>
+                      </div>
+                    </div>
+                    <div class="logo">
+                      <img src="" width="60" class="img-fluid" id="img_bank" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </center>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

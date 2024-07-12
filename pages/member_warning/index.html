@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+    <link
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css"
+    />
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepicker.js"></script>
+    <style>
+      body,
+      #app {
+        font-family: inherit !important;
+      }
+
+      .mo-bb {
+        font-size: inherit;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div id="app" class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <h1>รายการ Warning Member</h1>
+              </div>
+              <div class="col-12 pb-3">
+                <button
+                  class="btn btn-success btn-lg waves-effect waves-light"
+                  id="balance_pro2"
+                  @click="addWarning()"
+                >
+                  เพิ่ม Warning
+                </button>
+                <br />
+                <br />
+                <div class="card shadow mb-5">
+                  <div class="card-header border-0 pt-4">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="d-flex flex-wrap text-left">
+                        <div class="d-flex flex-wrap">
+                          <div class="d-flex flex-column form-group">
+                            <label>จากวันที่</label>
+                            <input
+                              type="text"
+                              name="startDate"
+                              id="startDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label>ถึงวันที่</label>
+                            <input
+                              type="text"
+                              name="endDate"
+                              id="endDate"
+                              class="form-control date-picker"
+                            />
+                          </div>
+                          <div class="d-flex flex-column form-group">
+                            <label class="text-white">*</label>
+                            <button
+                              class="form-control btn btn-outline-info"
+                              id="dash_0"
+                              @click="search()"
+                            >
+                              ค้นหา
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-wrap text-right pt-2">
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_3"
+                          @click="lastmonth()"
+                        >
+                          เดือนที่แล้ว
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_3"
+                          @click="thismonth()"
+                        >
+                          เดือนนี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_2"
+                          @click="lastweek()"
+                        >
+                          สัปดาห์ที่แล้ว
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_2"
+                          @click="thisweek()"
+                        >
+                          สัปดาห์นี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_1"
+                          @click="yesterday()"
+                        >
+                          เมื่อวานนี้
+                        </button>
+                        <button
+                          class="btn btn-outline-info"
+                          id="dash_0"
+                          @click="today()"
+                        >
+                          วันนี้
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table id="logs" class="table table-hover" width="100%">
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+
+      <!-- #################################### Add Warning #################################### -->
+      <div class="modal fade" id="add_warning" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">เพิ่มข้อมูล Warning</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="add_username"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">รายละเอียดการ Warning</label>
+                <textarea
+                  id="add_detail"
+                  class="form-control"
+                  cols="30"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                @click="sendWarning()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #################################### Add Warning #################################### -->
+
+      <!-- #################################### Update Warning #################################### -->
+      <div class="modal fade" id="update_warning" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">อัพเดทข้อมูล Warning</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="update_username"
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">รายละเอียดการ Warning</label>
+                <textarea
+                  id="update_detail"
+                  class="form-control"
+                  cols="30"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelect2" class="form-label mt-4"
+                  >สถานะเปิด/ปิด Warning</label
+                >
+                <select class="form-select" id="selectStatus"></select>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                @click="updateWarning()"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #################################### Update Warning #################################### -->
+    </div>
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="js/index.js"></script>
+    <script></script>
+  </body>
+</html>

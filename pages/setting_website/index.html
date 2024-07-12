@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico"
+    />
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit" />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css"
+    />
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+      <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+      <div w3-include-html="../includes/sidebar.html"></div>
+      <div class="content-wrapper pt-3">
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">ตั้งค่าระบบ</h3>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-10">
+                      <div class="card card-light ml-4">
+                        <div class="card-header">
+                          <h3 class="card-title">ตั้งค่ากลุ่ม VIP</h3>
+                        </div>
+                        <div class="card-body">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">ไอดีไลน์</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="line_groupvip"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">รายละเอียด</label>
+                            <textarea
+                              rows="10"
+                              class="form-control"
+                              id="text_groupvip"
+                            ></textarea>
+                          </div>
+                          <div class="card-footer" style="padding: 0px">
+                            <button
+                              id="edit_groupvip_setting"
+                              onclick="edit_groupvip_setting()"
+                              class="btn btn-primary"
+                              style="width: 100%"
+                            >
+                              บันทึก
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6" style="margin-bottom: 50px">
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">ตั้งค่าแบนเนอร์</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>ชื่อแบนเนอร์</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <input
+                          type="text"
+                          class="form-control text-center"
+                          placeholder="ชื่อแบนเนอร์"
+                          id="name_banner"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <label class="mt-4">ตำแหน่งแสดงผล</label>
+                      </div>
+                      <div class="col-5">
+                        <fieldset class="form-group">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="banner_checkhome"
+                              checked
+                            />
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              หน้าแรก
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="banner_checkuser"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="flexCheckChecked"
+                            >
+                              หน้าสมาชิก
+                            </label>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>ลำดับการแสดง</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <input
+                          type="number"
+                          class="form-control text-center"
+                          min="0"
+                          value="0"
+                          step="1"
+                          id="banner_order"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>รูปภาพ </label>
+                          <label style="color: red">(แนะนำ 639x373)</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <input
+                          type="hidden"
+                          class="file-control"
+                          id="url_file"
+                        />
+                        <input
+                          type="file"
+                          class="file-control"
+                          style="width: 200px"
+                          name="file"
+                          id="file"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>สถานะ</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <label class="switch">
+                          <input type="checkbox" id="banner_status" />
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button
+                        class="btn btn-success"
+                        onclick="edit_setting_banner()"
+                      >
+                        บันทึก
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <table id="banner" class="table table-hover"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6" style="margin-bottom: 50px">
+                <div class="card card-dark">
+                  <div class="card-header">
+                    <h3 class="card-title">ตั้งค่าป๊อบอัพ</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>ชื่อป๊อบอัพ</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <input
+                          type="text"
+                          class="form-control text-center"
+                          placeholder="ชื่อแบนเนอร์"
+                          id="name_popup"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>รายละเอียด</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <textarea
+                          rows="5"
+                          class="form-control text-center"
+                          id="des_popup"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>รูปภาพ </label>
+                          <label style="color: red">(แนะนำ 639x373)</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <input
+                          type="hidden"
+                          class="file-control"
+                          id="url_file_popup"
+                        />
+                        <input
+                          type="file"
+                          class="file-control"
+                          style="width: 200px"
+                          name="file"
+                          id="file_popup"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label>สถานะ</label>
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <label class="switch">
+                          <input type="checkbox" id="popup_status" />
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button
+                        class="btn btn-success"
+                        onclick="edit_setting_popup()"
+                      >
+                        บันทึก
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <table id="popup" class="table table-hover"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+    <!-- <script src="./js/dashboard.js"></script> -->
+  </body>
+</html>

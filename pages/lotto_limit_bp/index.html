@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+
+                    <!-- <form id="formUpdateDemo">
+                        <input type="text" name="data[lotto_type]" value="1">
+                        <input type="text" name="data[lotto_date]" value="2022-05-17">
+                        <input type="text" name="data[lotto_reward_type]" value="1">
+                        <input type="text" name="data[number]" value="235">
+                        <input type="text" name="data[reward]" value="100">
+                        <input type="text" name="id" value="0">
+                        <button onclick="demoApiNoGen()">บันทึก</button>
+                    </form>
+
+                    <form id="formDemo">
+                        <input type="text" name="lotto_type" value="1">
+                        <input type="text" name="lotto_date" value="2022-05-17">
+                        <button onclick="demoApiGen()">บันทึก</button>
+                    </form> -->
+                    <div class="row">
+                        <div class="col-12" style="margin-bottom: 50px;">
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title"> ค้นหา</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 row">
+                                        <label class="col-form-label col-sm-2 text-sm-end">ประเภทหวย :</label>
+                                        <div class="col-sm-2">
+                                            <select id="statusLottoType" name="statusLottoType" onchange="onChangeSelectLottoType('lotto-date','statusLottoType')" class="form-control form-select ">
+                                            </select>
+                                        </div>
+                                        <label class="col-form-label col-sm-2 text-sm-end">วันที่ออกรางวัล :</label>
+                                        <div class="col-sm-2">
+                                            <select name="lottoDate" id="lotto-date" class="form-control form-select">
+                                                <option value="0">--เลือกงวดหวย--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <button type="submit" id="" name="" onclick="setData()" class="btn btn-pill btn-primary me-2">ค้นหา</button>
+                                            <a type="button" href="#" id="" name="" onclick="" class="btn btn-pill btn-secondary ">รีเซ็ต</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-12" style="margin-bottom: 50px;">
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title"> รายการ</h3>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <a href="#" onclick="openModalAdd()" class="btn btn-success ">
+                                            <i class="fas fa-plus-circle"></i> เพิ่มเลข
+                                        </a>
+                                    </div>
+
+
+
+
+                                    <div class="mb-3">
+                                        <span>
+                                            <div style="width:300px;">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ประเภท</label>
+                                                    <select id="addLottoTypeReward" name="addLottoTypeReward"
+                                                        class="form-control form-select "
+                                                        onchange="onChangeRewardType()" disabled>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </span>
+                                        <div class="mb-3" style="display:none" id="three_type">
+                                            <a href="#" onclick="reveseBtn('three_six',6)" class="btn btn-secondary" id="three_six">
+                                                หกกลับ
+                                            </a>
+                                            <a href="#" onclick="reveseBtn('three_three',3)" class="btn btn-secondary" id="three_three">
+                                                สามกลับ
+                                            </a>
+                                        </div>
+                                        <div class="mb-3" style="display:none" id="two_type">
+                                            <a href="#" onclick="reveseBtn('two_res',2)" class="btn btn-secondary" id="two_res">
+                                                เลขกลับ
+                                            </a>
+                                        </div>
+                                        <span>
+                                            <div style="width:300px;">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ตัวเลข</label>
+                                                    <input type="text" class="form-control" id="add_number"
+                                                        style="text-align:center;" disabled>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                    </div>
+                                    <div id="list_num_show" style="display:none;">
+                                    </div>
+
+                                    <div id="list_num_show_btn" style="display:none;">
+                                        <br>
+                                        <div class="modal-footer" style="display: inline-block;">
+                                            <button type="button" class="btn btn-danger" onclick="resetLimit()">Reset</button>
+                                            <button type="button" class="btn btn-success" onclick="addLottoLimit()">บันทึก</button>
+                                        </div>
+
+                                    </div>
+                                    <table id="logs_lotto_limit" class="table table-hover" width="100%">
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div w3-include-html="../includes/footer.html"></div>
+
+    </div>
+
+    <!-- #################################### ADD LOTTO LIMIT  #################################### -->
+    <div class="modal fade" id="add_lotto_limit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">เพิ่มข้อมูล</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <input type="hidden" id="id_member" value="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อหวยหวย</label>
+                        <select id="addLottoType" name="addLottoType" onchange="onChangeAddLottoType()" class="form-control form-select ">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">งวด</label>
+                        <select id="addLottoTypeDate" name="addLottoTypeDate" class="form-control form-select " disabled>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="exampleInputEmail1">ประเภท</label>
+                        <select id="addLottoTypeReward" name="addLottoTypeReward" class="form-control form-select "
+                            disabled>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">เลขอั้น</label>
+                        <input type="text" class="form-control" id="addLottoTypeNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ราคาจ่าย</label>
+                        <input type="text" class="form-control" id="addLottoTypeRate">
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="addLottoLimit()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #################################### END ADD LOTTO LIMIT  #################################### -->
+
+
+
+    <!-- #################################### EDIT LOTTO LIMIT  #################################### -->
+    <div class="modal fade" id="edit_lotto_limit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">แก้ไขข้อมูล</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <input type="hidden" id="edit_id_member" value="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อหวยหวย</label>
+                        <select id="editLottoType" name="editLottoType" onchange="onChangeEditLottoType()" class="form-control form-select ">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">งวด</label>
+                        <select id="editLottoTypeDate" name="editLottoTypeDate" class="form-control form-select ">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ประเภท</label>
+                        <select id="editLottoTypeReward" name="editLottoTypeReward" class="form-control form-select ">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">เลขอั้น</label>
+                        <input type="text" class="form-control" id="editLottoTypeNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ราคาจ่าย</label>
+                        <input type="text" class="form-control" id="editLottoTypeRate">
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="upDateLottoLimit()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #################################### EDIT edit LOTTO LIMIT  #################################### -->
+
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

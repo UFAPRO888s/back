@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+<script src="/pages/authen.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ระบบหลังบ้าน || By Firework</title>
+    <link rel="shortcut icon" type="image/x-icon" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/images/favicon.ico">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Kanit">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/style.css">
+    <link href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/toastr.min.css">
+    <link rel="stylesheet" href="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/css/MCDatepicker.css">
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/MCDatepickerEN.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="loaderbg">
+        <div class="loader"></div>
+    </div>
+    <div id="app" class="wrapper">
+        <div w3-include-html="../includes/sidebar.html"></div>
+        <div class="content-wrapper pt-3">
+            <!-- Main content -->
+            <h4 style="margin-left: 20px;">โบนัสการแนะนำเพื่อน</h4>
+            <h4></h4>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header border-0 pt-4" style="background-color: green;">
+                                <h4 style="color: white;">
+                                    โบนัสการแนะนำเพื่อน
+                                </h4>
+                                <P style="color: white;">รายการโบนัสแนะนำเพื่อน</P>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ตั้งค่าความเสี่ยง-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container-fluid pt-4">
+                                <form action="#" method="post" id="formSubmit">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-3">
+                                            <div class="form-group">
+                                                <label>จากวันที่</label>
+                                                <input type="text" name="startDate" id="startDate" class="form-control date-picker">
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-sm-3">
+                                            <div class="form-group">
+                                                <label>ถึงวันที่</label>
+                                                <input type="text" name="endDate" id="endDate" class="form-control date-picker">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class=" btn col-sm-3">
+                                        <fieldset style="border: 1px solid rgb(112, 112, 112); cursor:default ;">
+                                            <legend style="text-align: left; font-size: 14px;">ประเภท</legend>
+                                            <input type="checkbox" name="checkAll" id="checkAll" style="margin-left: 5px;" v-model="checkAll"><label style="margin-left: 5px;">ทั้งหมด</label>
+                                            <input type="checkbox" name="checkLotto" id="checkLotto" style="margin-left: 5px;" v-model="checkLotto"><label style="margin-left: 5px;">หวย</label>
+                                            <input type="checkbox" name="checkGame" id="checkGame" style="margin-left: 5px;" v-model="checkGame"><label style="margin-left: 5px;">เกม</label>
+                                        </fieldset>
+                                    </div>
+                                    <div style="padding: 10px;"></div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-primary" onclick="handleDataTable()">ค้นหา</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div style="padding: 10px;"></div>
+                                <div class="card card-outline card" style="border-radius: 0px !important;">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table table-bordered" id="tableReferalBonus" width="100%"></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--script show arrow-->
+    <script>
+        function Showcontent() {
+            var x = document.getElementById("showarrow");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <div w3-include-html="../includes/footer.html"></div>
+    </div>
+
+
+
+
+    <!-- scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/jquery/jquery.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/adminlte.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/DateTimePicker/datetimepicker-master.js"></script>
+
+    <!-- datatables -->
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/constants/includepage.js"></script>
+    <script src="//s3auto.sgp1.vultrobjects.com/js_wauto/assets/js/toastr.min.js"></script>
+    <script src="../../constants/apiPort.js"></script>
+    <script src="../../constants/statusTextRespone.js"></script>
+    <script src="../../constants/validateValue.js"></script>
+    <script src="../../constants/util.js"></script>
+    <script src="../../includes/navtest.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
